@@ -47,5 +47,16 @@ namespace MVC.Controllers
             }
             return View(details);
         }
+
+        public ActionResult IndexSummary()
+        {
+            var userId = ClaimsPrincipal.Current.FindFirst(ClaimTypes.NameIdentifier);
+            var dashboard = _dashboardService.GetDashboardBookmarksSummaryData();
+            if (dashboard != null)
+            {
+                return View(dashboard);
+            }
+            return Redirect("Home/Index");
+        }
     }
 }

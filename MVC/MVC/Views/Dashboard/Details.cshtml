@@ -28,11 +28,3 @@
         }
 
     </table>
-@{ 
-    var chart = new Chart(width: 500, height: 500, theme: ChartTheme.Yellow)
-    .AddTitle("USA City Distribution")
-    .AddSeries("Default", chartType: "Pie",
-    xValue: Model, xField: "URL",
-    yValues: Model, yFields: "ClickCount")
-    .Write();
-}

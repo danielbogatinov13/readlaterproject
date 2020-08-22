@@ -9,5 +9,6 @@ namespace ReadLater.Services
         List<Category> GetDashboardCategoriesData(Guid userId);
         List<Bookmark> GetDashboardBookmarksData(Guid userId);
         List<Bookmark> GetDashboardCategoryDetailsData(int categoryId);
+        List<Bookmark> GetDashboardBookmarksSummaryData();
     }
 }

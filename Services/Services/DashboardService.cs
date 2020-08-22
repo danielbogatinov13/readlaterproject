@@ -56,5 +56,15 @@ namespace ReadLater.Services
 
             return bookmarks;
         }
+
+        public List<Bookmark> GetDashboardBookmarksSummaryData()
+        {
+            var bookmarks = _unitOfWork.Repository<Bookmark>().Query()
+                .OrderBy(l => l.OrderByDescending(b => b.ClickCount))
+                .Get()
+                .Take(10)
+                .ToList();
+            return bookmarks;
+        }
     }
 }
