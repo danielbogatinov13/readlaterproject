@@ -41,8 +41,10 @@
   <ItemGroup>
     <Compile Include="BookmarkService.cs" />
     <Compile Include="CategoryService.cs" />
+    <Compile Include="DashboardService.cs" />
     <Compile Include="IBookmarkService.cs" />
     <Compile Include="ICategoryService.cs" />
+    <Compile Include="IDashboardService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

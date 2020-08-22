@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using ReadLater.Data;
@@ -22,8 +23,13 @@ namespace MVC.Controllers
         // GET: Categories
         public ActionResult Index()
         {
-            List<Category> model = _categoryService.GetCategories();
-            return View(model);
+            if (ClaimsPrincipal.Current.HasClaim(c => c.Type == ClaimTypes.NameIdentifier))
+            {
+                var userId = ClaimsPrincipal.Current.FindFirst(ClaimTypes.NameIdentifier);
+                List<Category> model = _categoryService.GetCategories(new Guid(userId.Value));
+                return View(model);
+            }
+            return View();
         }
 
         // GET: Categories/Details/5
@@ -55,10 +61,15 @@ namespace MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name")] Category category)
         {
+
             if (ModelState.IsValid)
             {
-                _categoryService.CreateCategory(category);
-                return RedirectToAction("Index");
+                if (ClaimsPrincipal.Current.HasClaim(c => c.Type == ClaimTypes.NameIdentifier))
+                {
+                    var userId = ClaimsPrincipal.Current.FindFirst(ClaimTypes.NameIdentifier);
+                    _categoryService.CreateCategory(category, new Guid(userId.Value));
+                    return RedirectToAction("Index");
+                }
             }
 
             return View(category);

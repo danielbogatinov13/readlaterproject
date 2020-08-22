@@ -17,8 +17,9 @@ namespace ReadLater.Services
             _unitOfWork = unitOfWork;
         }
 
-        public Category CreateCategory(Category category)
+        public Category CreateCategory(Category category, Guid userId)
         {
+            category.UserCreatedId = userId;
             _unitOfWork.Repository<Category>().Insert(category);
             _unitOfWork.Save();
             return category;
@@ -30,9 +31,9 @@ namespace ReadLater.Services
             _unitOfWork.Save();
         }
 
-        public List<Category> GetCategories()
+        public List<Category> GetCategories(Guid userId)
         {
-            return _unitOfWork.Repository<Category>().Query().Get().ToList();
+            return _unitOfWork.Repository<Category>().Query().Filter(c => c.UserCreatedId == userId).Get().ToList();
         }
 
         public Category GetCategory(int Id)

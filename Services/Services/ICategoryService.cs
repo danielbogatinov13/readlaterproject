@@ -5,8 +5,8 @@ namespace ReadLater.Services
 {
     public interface ICategoryService
     {
-        Category CreateCategory(Category category);
-        List<Category> GetCategories();
+        Category CreateCategory(Category category, Guid userId);
+        List<Category> GetCategories(Guid userId);
         Category GetCategory(int Id);
         Category GetCategory(string Name);
         void UpdateCategory(Category category);

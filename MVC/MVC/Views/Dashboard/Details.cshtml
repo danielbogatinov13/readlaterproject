@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ReadLater.Entities.Bookmark>
+    @{
+        ViewBag.Title = "Details";
+    }
+
+    <h2>Details</h2>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.URL)
+            </th>
+            <th>
+                Click Count
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.URL)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.ClickCount)
+                </td>
+            </tr>
+        }
+
+    </table>
+@{ 
+    var chart = new Chart(width: 500, height: 500, theme: ChartTheme.Yellow)
+    .AddTitle("USA City Distribution")
+    .AddSeries("Default", chartType: "Pie",
+    xValue: Model, xField: "URL",
+    yValues: Model, yFields: "ClickCount")
+    .Write();
+}

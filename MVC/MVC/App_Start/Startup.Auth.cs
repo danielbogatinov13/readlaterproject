@@ -15,6 +15,7 @@ namespace MVC
         public void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context, user manager and signin manager to use a single instance per request
+
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
@@ -54,15 +55,14 @@ namespace MVC
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+                           appId: "369145307410560",
+                           appSecret: "ecde4422e3d172a2af157b4ec616191a");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            //app.UseGoogleAuthentication(
+            //    "346814485322-im2m3huq1jgcjdfu3qvotms22r92akti.apps.googleusercontent.com",
+            //    "Mc4zpLfRqSzWKY75lVEd8eyy")
+            //    ;
         }
     }
 }
